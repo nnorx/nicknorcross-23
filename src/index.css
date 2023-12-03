@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "Porlane";
+  src: url("./assets/Porlane-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "NeueMontreal";
+  src: url("./assets/NeueMontreal-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+}
+
+body {
+  font-size: 1.171vw;
+  background-color: #292929;
+  overflow-y: hidden;
+}
+
+:root {
+  --xs: 600px;
+  --sm: 767px;
+  --md: 992px;
+  --lg: 1280px;
+}
+
+@media (max-width: 992px) {
+  body {
+    font-size: 0.937rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  body {
+    font-size: 1.4rem;
+  }
+}
+
+/* hide scrollbar for chrome, safari and opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
