@@ -32,10 +32,10 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Upload production-ready build files
-        uses: actions/upload-artifact@v4
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages
           path: ./dist
 
   deploy:
@@ -43,20 +43,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
+
     permissions:
       pages: write
       id-token: write
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: ./artifact
-
-      - name: List artifact contents
-        run: ls -lh ./artifact
-
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
