@@ -9,7 +9,7 @@ import {
 import { IoMdMoon, IoMdSunny } from "react-icons/io";
 
 type Props = {
-  pageRef: React.RefObject<HTMLDivElement>;
+  pageRef: React.RefObject<HTMLDivElement | null>;
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 };

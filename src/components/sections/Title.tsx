@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 type Props = {
-  pageRef: React.RefObject<HTMLDivElement>;
+  pageRef: React.RefObject<HTMLDivElement | null>;
   theme: Theme;
 };
 

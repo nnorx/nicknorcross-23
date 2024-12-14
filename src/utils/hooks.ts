@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, RefObject } from "react";
 export type ScrollDirection = "up" | "down" | undefined;
 
 export function useScrollDirection(
-  ref: RefObject<HTMLElement>
+  ref: RefObject<HTMLElement | null>
 ): ScrollDirection {
   const [scrollDirection, setScrollDirection] =
     useState<ScrollDirection>("down");
