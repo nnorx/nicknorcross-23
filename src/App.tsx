@@ -1,72 +1,69 @@
-import { useState, useRef } from "react";
+import Body from "./components/Body";
+import Column from "./components/Column";
+import Header from "./components/Header";
+import Link from "./components/Link";
+import Main from "./components/Main";
+import Section from "./components/Section";
+import Text from "./components/Text";
+import Title from "./components/Title";
 
-import "./App.css";
+const content = {
+  header: {
+    name: "Nick Norcross",
+    title: "Software Engineer",
+  },
+  main: {
+    title: "Today",
+    description:
+      "I work as a software engineer at Clearview AI. I like to build user interfaces that solve problems intuitively through design and code.",
+  },
+  projects: {
+    title: "Projects",
+    items: [
+      {
+        href: "https://nnorx.github.io/MovingAverages",
+        title: "Fear & Greed Index Moving Averages",
+        description: "Data Visualization",
+      },
+      {
+        href: "https://nnorx.github.io/WordleClone",
+        title: "Wordle Clone",
+        description: "JavaScript",
+      },
+    ],
+  },
+};
 
-import styled, { css, keyframes } from "styled-components";
-import Footer from "./components/sections/Footer";
-import Navbar from "./components/common/Navbar";
-import Hero from "./components/sections/Hero";
-import About from "./components/sections/About";
-import Services from "./components/sections/Services";
-import Experience from "./components/sections/Experience";
-import Projects from "./components/sections/Projects";
-import Title from "./components/sections/Title";
-import { Theme, themeBgColors } from "./utils/Theme";
-
-const fadeInFrames = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(3rem);
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
-
-const fadeIn = (delay?: string, duration?: string) => css`
-  animation: ${fadeInFrames} ${duration || "0.25s"} ease-in-out forwards;
-  animation-delay: ${delay || "0s"};
-`;
-
-const PageBody = styled.div<{ $menuOpen?: boolean }>`
-  width: 100%;
-  ${css`
-    opacity: 0;
-    ${fadeIn("0.4s", "0.3s")}
-  `}
-
-  animation-direction: alternate;
-`;
-
-const Page = styled.div<{ $menuOpen?: boolean; theme: Theme }>`
-  background-color: ${({ theme }) =>
-    themeBgColors[theme as keyof typeof themeBgColors]};
-  height: 100%;
-  position: relative;
-  overflow-y: ${({ $menuOpen }) => ($menuOpen ? "hidden" : "auto")};
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  transition: background-color 0.3s ease-in-out;
-`;
-
-export default function App() {
-  const pageRef = useRef<HTMLDivElement>(null);
-  const [theme, setTheme] = useState<Theme>(Theme.dark);
-
+const App = () => {
   return (
-    <Page ref={pageRef} id="page" className="page-wrapper" theme={theme}>
-      <Navbar pageRef={pageRef} theme={theme} setTheme={setTheme} />
+    <Body>
+      <Header>
+        <Link href="/">
+          <Text>{content.header.name}</Text>
+        </Link>
+        <Text type="secondary">{content.header.title}</Text>
+      </Header>
 
-      <PageBody id="pgBody" className="pgBody">
-        <Title pageRef={pageRef} theme={theme} />
-        <Hero theme={theme} />
-        <About theme={theme} />
-        <Services theme={theme} />
-        <Experience theme={theme} />
-        <Projects theme={theme} />
-        <Footer theme={theme} />
-      </PageBody>
-    </Page>
+      <Main>
+        <Title>{content.main.title}</Title>
+        <Text pretty tag="p" type="secondary">
+          {content.main.description}
+        </Text>
+
+        <Section>
+          <Title>{content.projects.title}</Title>
+          <Column>
+            {content.projects.items.map((project, index) => (
+              <Link key={index} button href={project.href}>
+                <Text>{project.title}</Text>
+                <Text type="secondary">{project.description}</Text>
+              </Link>
+            ))}
+          </Column>
+        </Section>
+      </Main>
+    </Body>
   );
-}
+};
+
+export default App;
